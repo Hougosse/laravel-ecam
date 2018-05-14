@@ -104,16 +104,6 @@
                     alert('Voyage ajouté');
                     this.fetchVoyages();
                 }
-                    /*axios.post('/formulas/create', {
-                        name: "",
-                        parts: ""
-                    })
-                    .then(response => { 
-                        console.log(response)
-                    })
-                    .catch(error => {
-                        console.log(error.response)
-                    });*/
                     
                     //Mettre à jour la base de données
                 else {
@@ -136,23 +126,22 @@
                 window.location.replace('#form');
             },
 
+            //Afficher le formulaire
             afficherForm(){
                 this.show = true;
+                this.edit=false;
+                this.voyage.id = '';
+                this.voyage.nom = '';
+                this.voyage.description = '';
+                this.voyage.climat = '';
+                this.voyage.caracteristiques = '';
             },
 
+            //Faire disparaitre le formulaire
             retirerForm(){
                 this.show=false;
+
             }
-    
-            /*makePagination(meta, links) {
-                let pagination = {
-                    current_page: meta.current_page,
-                    last_page: meta.last_page,
-                    next_page_url: links.next,
-                    prev_page_url: links.prev
-                };
-                this.pagination = pagination;
-            }*/
         },
     };
 </script>
