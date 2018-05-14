@@ -1,47 +1,55 @@
 <template>
     <div>
-        <h2>Voyages</h2>
-
+        <h1>CustomTravels, le site de voyage sur-mesure</h1>
             <br>
-            <h3>Ajouter ou modifier un voyage</h3>    
-            <div class="form-group">
-                <input type='text' class='form-control' placeholder="Nom" v-model="voyage.nom">
-            </div>
-            <div class="form-group">
-                <textarea class='form-control' placeholder="Description" v-model="voyage.description"></textarea>
-            </div>
-            <div class='form-group'>
-                <label>Caractéristiques</label> :* 
-                <br>
-                <input type="radio" value="aventurier" v-model="voyage.caracteristiques">Aventurier
-                <br>
-                <input type="radio" value="curieux" v-model="voyage.caracteristiques">Curieux
-                <br>
-                <input type="radio" value="calme" v-model="voyage.caracteristiques">Calme 
-                <br>
-            </div>
+            <button type='submit' class='btn btn-primary' v-on:click="afficherForm" v-if='!show'>Créer un voyage</button>
+            <button type='submit' class='btn btn-info' v-on:click="retirerForm" v-if='show'>Annuler</button>
+            <br>
+            <div id='form' v-if='show'>
+                <hr>
+                <h2>Ajouter ou modifier un voyage</h2>    
+                <div class="form-group">
+                    <input type='text' class='form-control' placeholder="Nom" v-model="voyage.nom">
+                </div>
+                <div class="form-group">
+                    <textarea class='form-control' placeholder="Description" v-model="voyage.description"></textarea>
+                </div>
+                <div class='form-group'>
+                    <label>Caractéristiques</label> :* 
+                    <br>
+                    <input type="radio" value="aventurier" v-model="voyage.caracteristiques">Aventurier
+                    <br>
+                    <input type="radio" value="curieux" v-model="voyage.caracteristiques">Curieux
+                    <br>
+                    <input type="radio" value="calme" v-model="voyage.caracteristiques">Calme 
+                    <br>
+                </div>
 
-            <div class='form-group'>
-                <label>Climat</label>:* 
-                <br>
-                <input type="radio" value="tropical" v-model="voyage.climat">Tropical
-                <br>
-                <input type="radio" value="tempéré" v-model="voyage.climat">Tempéré
-                <br>
-                <input type="radio" value="montagneux" v-model="voyage.climat">Montagneux 
-                <br>
+                <div class='form-group'>
+                    <label>Climat</label>:* 
+                    <br>
+                    <input type="radio" value="tropical" v-model="voyage.climat">Tropical
+                    <br>
+                    <input type="radio" value="tempéré" v-model="voyage.climat">Tempéré
+                    <br>
+                    <input type="radio" value="montagneux" v-model="voyage.climat">Montagneux 
+                    <br>
+                </div>
+                
+                <div class="btn btn-info" @click="ajouterVoyage">Enregistrer</div>
+                </div>
+                <hr>
+            <h2 class='ml-3'>Voyages</h2>
+            <div class='card card-body mb-2' v-for='voyage in voyages' v-bind:key="voyage.id">
+                <h3> {{voyage.nom}} </h3>
+                <p> {{voyage.description}} </p>
+                <hr>
+                <div class='row'>
+                    <button @click='editerVoyage(voyage)' class='btn btn-warning mb-2 ml-2'>Modifier</button>
+                    <button @click='supprimerVoyage(voyage.id)' class='btn btn-danger mb-2 ml-4'>Supprimer</button>
+                </div>
             </div>
-            
-            <div class="btn btn-info" @click="ajouterVoyage">Enregistrer</div>
             <hr>
-        <div class='card card-body mb-2' v-for='voyage in voyages' v-bind:key="voyage.id">
-            <h3> {{voyage.nom}} </h3>
-            <p> {{voyage.description}} </p>
-            <hr>
-            <button @click='editerVoyage(voyage)' class='btn btn-warning mb-2'>Modifier</button>
-            <button @click='supprimerVoyage(voyage.id)' class='btn btn-danger'>Supprimer</button>
-        </div>
-        <hr>
     </div>
 </template>
 
@@ -58,7 +66,8 @@
                     caracteristiques: '',
                     img_presentation: 'document_1525777760.rtf'
                 },
-                edit: false
+                edit: false,
+                show: false
             };
         },
     
@@ -117,12 +126,22 @@
 
             editerVoyage(voyage){
                 this.edit = true;
+                this.show = true;
                 this.voyage = JSON.parse(JSON.stringify(voyage));
                 this.voyage.id = voyage.id;
                 this.voyage.nom = voyage.nom;
                 this.voyage.description = voyage.description;
                 this.voyage.climat = voyage.climat;
                 this.voyage.caracteristiques = voyage.caracteristiques;
+                window.location.replace('#form');
+            },
+
+            afficherForm(){
+                this.show = true;
+            },
+
+            retirerForm(){
+                this.show=false;
             }
     
             /*makePagination(meta, links) {

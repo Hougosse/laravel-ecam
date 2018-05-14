@@ -47461,6 +47461,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47474,7 +47482,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 caracteristiques: '',
                 img_presentation: 'document_1525777760.rtf'
             },
-            edit: false
+            edit: false,
+            show: false
         };
     },
     created: function created() {
@@ -47533,12 +47542,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         editerVoyage: function editerVoyage(voyage) {
             this.edit = true;
+            this.show = true;
             this.voyage = JSON.parse(JSON.stringify(voyage));
             this.voyage.id = voyage.id;
             this.voyage.nom = voyage.nom;
             this.voyage.description = voyage.description;
             this.voyage.climat = voyage.climat;
             this.voyage.caracteristiques = voyage.caracteristiques;
+            window.location.replace('#form');
+        },
+        afficherForm: function afficherForm() {
+            this.show = true;
+        },
+        retirerForm: function retirerForm() {
+            this.show = false;
         }
 
         /*makePagination(meta, links) {
@@ -47565,201 +47582,239 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h2", [_vm._v("Voyages")]),
+      _c("h1", [_vm._v("CustomTravels, le site de voyage sur-mesure")]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("h3", [_vm._v("Ajouter ou modifier un voyage")]),
+      !_vm.show
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "submit" },
+              on: { click: _vm.afficherForm }
+            },
+            [_vm._v("Créer un voyage")]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("input", {
-          directives: [
+      _vm.show
+        ? _c(
+            "button",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.nom,
-              expression: "voyage.nom"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Nom" },
-          domProps: { value: _vm.voyage.nom },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.voyage, "nom", $event.target.value)
-            }
-          }
-        })
-      ]),
+              staticClass: "btn btn-info",
+              attrs: { type: "submit" },
+              on: { click: _vm.retirerForm }
+            },
+            [_vm._v("Annuler")]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.description,
-              expression: "voyage.description"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { placeholder: "Description" },
-          domProps: { value: _vm.voyage.description },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.voyage, "description", $event.target.value)
-            }
-          }
-        })
-      ]),
+      _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Caractéristiques")]),
-        _vm._v(" :* \n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.caracteristiques,
-              expression: "voyage.caracteristiques"
-            }
-          ],
-          attrs: { type: "radio", value: "aventurier" },
-          domProps: {
-            checked: _vm._q(_vm.voyage.caracteristiques, "aventurier")
-          },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "caracteristiques", "aventurier")
-            }
-          }
-        }),
-        _vm._v("Aventurier\n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.caracteristiques,
-              expression: "voyage.caracteristiques"
-            }
-          ],
-          attrs: { type: "radio", value: "curieux" },
-          domProps: { checked: _vm._q(_vm.voyage.caracteristiques, "curieux") },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "caracteristiques", "curieux")
-            }
-          }
-        }),
-        _vm._v("Curieux\n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.caracteristiques,
-              expression: "voyage.caracteristiques"
-            }
-          ],
-          attrs: { type: "radio", value: "calme" },
-          domProps: { checked: _vm._q(_vm.voyage.caracteristiques, "calme") },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "caracteristiques", "calme")
-            }
-          }
-        }),
-        _vm._v("Calme \n            "),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Climat")]),
-        _vm._v(":* \n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.climat,
-              expression: "voyage.climat"
-            }
-          ],
-          attrs: { type: "radio", value: "tropical" },
-          domProps: { checked: _vm._q(_vm.voyage.climat, "tropical") },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "climat", "tropical")
-            }
-          }
-        }),
-        _vm._v("Tropical\n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.climat,
-              expression: "voyage.climat"
-            }
-          ],
-          attrs: { type: "radio", value: "tempéré" },
-          domProps: { checked: _vm._q(_vm.voyage.climat, "tempéré") },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "climat", "tempéré")
-            }
-          }
-        }),
-        _vm._v("Tempéré\n            "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.voyage.climat,
-              expression: "voyage.climat"
-            }
-          ],
-          attrs: { type: "radio", value: "montagneux" },
-          domProps: { checked: _vm._q(_vm.voyage.climat, "montagneux") },
-          on: {
-            change: function($event) {
-              _vm.$set(_vm.voyage, "climat", "montagneux")
-            }
-          }
-        }),
-        _vm._v("Montagneux \n            "),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "btn btn-info", on: { click: _vm.ajouterVoyage } },
-        [_vm._v("Enregistrer")]
-      ),
+      _vm.show
+        ? _c("div", { attrs: { id: "form" } }, [
+            _c("hr"),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Ajouter ou modifier un voyage")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.nom,
+                    expression: "voyage.nom"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Nom" },
+                domProps: { value: _vm.voyage.nom },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.voyage, "nom", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.description,
+                    expression: "voyage.description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Description" },
+                domProps: { value: _vm.voyage.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.voyage, "description", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Caractéristiques")]),
+              _vm._v(" :* \n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.caracteristiques,
+                    expression: "voyage.caracteristiques"
+                  }
+                ],
+                attrs: { type: "radio", value: "aventurier" },
+                domProps: {
+                  checked: _vm._q(_vm.voyage.caracteristiques, "aventurier")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "caracteristiques", "aventurier")
+                  }
+                }
+              }),
+              _vm._v("Aventurier\n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.caracteristiques,
+                    expression: "voyage.caracteristiques"
+                  }
+                ],
+                attrs: { type: "radio", value: "curieux" },
+                domProps: {
+                  checked: _vm._q(_vm.voyage.caracteristiques, "curieux")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "caracteristiques", "curieux")
+                  }
+                }
+              }),
+              _vm._v("Curieux\n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.caracteristiques,
+                    expression: "voyage.caracteristiques"
+                  }
+                ],
+                attrs: { type: "radio", value: "calme" },
+                domProps: {
+                  checked: _vm._q(_vm.voyage.caracteristiques, "calme")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "caracteristiques", "calme")
+                  }
+                }
+              }),
+              _vm._v("Calme \n                "),
+              _c("br")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Climat")]),
+              _vm._v(":* \n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.climat,
+                    expression: "voyage.climat"
+                  }
+                ],
+                attrs: { type: "radio", value: "tropical" },
+                domProps: { checked: _vm._q(_vm.voyage.climat, "tropical") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "climat", "tropical")
+                  }
+                }
+              }),
+              _vm._v("Tropical\n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.climat,
+                    expression: "voyage.climat"
+                  }
+                ],
+                attrs: { type: "radio", value: "tempéré" },
+                domProps: { checked: _vm._q(_vm.voyage.climat, "tempéré") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "climat", "tempéré")
+                  }
+                }
+              }),
+              _vm._v("Tempéré\n                "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voyage.climat,
+                    expression: "voyage.climat"
+                  }
+                ],
+                attrs: { type: "radio", value: "montagneux" },
+                domProps: { checked: _vm._q(_vm.voyage.climat, "montagneux") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.voyage, "climat", "montagneux")
+                  }
+                }
+              }),
+              _vm._v("Montagneux \n                "),
+              _c("br")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "btn btn-info", on: { click: _vm.ajouterVoyage } },
+              [_vm._v("Enregistrer")]
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("hr"),
+      _vm._v(" "),
+      _c("h2", { staticClass: "ml-3" }, [_vm._v("Voyages")]),
       _vm._v(" "),
       _vm._l(_vm.voyages, function(voyage) {
         return _c(
@@ -47772,31 +47827,33 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-warning mb-2",
-                on: {
-                  click: function($event) {
-                    _vm.editerVoyage(voyage)
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-warning mb-2 ml-2",
+                  on: {
+                    click: function($event) {
+                      _vm.editerVoyage(voyage)
+                    }
                   }
-                }
-              },
-              [_vm._v("Modifier")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                on: {
-                  click: function($event) {
-                    _vm.supprimerVoyage(voyage.id)
+                },
+                [_vm._v("Modifier")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger mb-2 ml-4",
+                  on: {
+                    click: function($event) {
+                      _vm.supprimerVoyage(voyage.id)
+                    }
                   }
-                }
-              },
-              [_vm._v("Supprimer")]
-            )
+                },
+                [_vm._v("Supprimer")]
+              )
+            ])
           ]
         )
       }),
