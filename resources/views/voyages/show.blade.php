@@ -3,7 +3,7 @@
 @section('content')
 <a href="./" class='btn btn-default mt-2'>Retour</a>
 <h1 class='mt-3'>{{$voyage->nom}}</h1>
-<img style='width:100%' src='http://localhost:8888/traveltest/public/storage/img_presentations/{{$voyage->img_presentation}}'>
+<img style='width:100%' src='http://localhost:8888/traveltest/public/storage/img_presentations/{{$voyage->img_presentation}}' alt='{{$voyage->nom}}'>
 <br><br>
 <div>{{$voyage->description}}</div >
 <hr>

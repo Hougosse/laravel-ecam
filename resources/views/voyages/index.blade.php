@@ -7,7 +7,7 @@
         <div class='well ml-5'>
                 <div class='row'>
                     <div class='col-md-4 col-sm-4'>
-                        <img style='width:100%' src='http://localhost:8888/traveltest/public/storage/img_presentations/{{$voyage->img_presentation}}'>
+                        <img style='width:100%' src='http://localhost:8888/traveltest/public/storage/img_presentations/{{$voyage->img_presentation}}' alt='{{$voyage->nom}}'>
                     </div>
                     <div class='col-md-8 col-sm-8'>
                         <h3 class='mt-3'><a href="/traveltest/public/voyages/{{$voyage->id}}"> {{$voyage->nom}}</a></h3>
