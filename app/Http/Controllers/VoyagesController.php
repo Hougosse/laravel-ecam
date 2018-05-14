@@ -66,7 +66,7 @@ class VoyagesController extends Controller
         $voyage->climat = $request->input('climat'); 
         $voyage->img_presentation = $fileNameToStore;
         $voyage->save();
-        return redirect('/voyages');
+        return redirect('/voyages')->with('success', 'Voyage créé');
     }
 
     /**
@@ -128,7 +128,7 @@ class VoyagesController extends Controller
             $voyage->img_presentation = $fileNameToStore;
         }            
         $voyage->save();
-        return redirect('/voyages');
+        return redirect('/voyages')->with('success', 'Voyage modifié');
     }
 
     /**
@@ -141,7 +141,7 @@ class VoyagesController extends Controller
     {
         $voyage = Voyage::find($voyage);
         $voyage->delete();
-        return redirect('/voyages');
+        return redirect('/voyages')->with('success', 'Voyage supprimé');
     }
 
     /*public function voyageperso()

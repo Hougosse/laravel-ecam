@@ -9,7 +9,8 @@
 <hr>
 <small>Créé le {{$voyage->created_at}}</small>
 <hr>
-<a href="/traveltest/public/voyages/{{$voyage->id}}/edit" class='btn btn-primary'>Editer</a>
+<a href="/traveltest/public/voyages/{{$voyage->id}}/edit" class='btn btn-primary pull-left'>Editer</a>
+<br><br>
 
 <form method="GET" action="http://localhost:8888/traveltest/public/voyages/delete/{{$voyage->id}}" class='pull-right'>
     {{ csrf_field() }}

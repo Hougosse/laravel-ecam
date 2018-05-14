@@ -8,7 +8,7 @@ use App\Voyage;
 class PagesControllerApi extends Controller
 {
     public function index(){
-        return view('index');
+        return view('welcome');
     }
 
 }

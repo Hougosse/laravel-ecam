@@ -36,7 +36,7 @@ class UsersController extends Controller
         $user->caracteristiques = $request->input('caracteristiques');    
         $user->climat = $request->input('climat');              
         $user->save();
-        return redirect('dashboard');
+        return redirect('dashboard')->with('success', 'Les résultats de votre recherche');
     }
 
 }

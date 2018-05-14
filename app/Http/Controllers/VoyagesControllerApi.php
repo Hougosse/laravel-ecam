@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Support\Facades\Storage;
-use App\Voyage;
 use Illuminate\Http\Request;
-//use App\Http\Resources\Voyage as VoyageResource;
+use App\Voyage;
 
 class VoyagesControllerApi extends Controller
 {
@@ -16,8 +14,8 @@ class VoyagesControllerApi extends Controller
      */
     public function index()
     {
-        $voyages=Voyage::all();
-        return response()->json($voyages, 100);
+        $voyages = Voyage::all();
+        return $voyages;
     }
 
     /**
@@ -28,27 +26,25 @@ class VoyagesControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        //Créer un voyage
         $voyage = new Voyage();
         $voyage->nom = $request->input('nom');
         $voyage->description = $request->input('description'); 
         $voyage->caracteristiques = $request->input('caracteristiques'); 
         $voyage->climat = $request->input('climat'); 
-        $voyage->user_id = $request->input('user_id');
         $voyage->img_presentation = $request->input('img_presentation');
         $voyage->save();
-        return response()->json('success', 100);
+        return response()->json('success', 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Voyage  $voyage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Voyage $voyage)
+    public function show($id)
     {
-        $voyage = Voyage::find($voyage->id);
+        $voyage = Voyage::find($id);
         return $voyage;
     }
 
@@ -56,31 +52,31 @@ class VoyagesControllerApi extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Voyage  $voyage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Voyage $voyage)
+    public function update(Request $request, $id)
     {
-        $voyage = Voyage::find($voyage->id);
+        $voyage = Voyage::find($id);
         $voyage->nom = $request->input('nom');
         $voyage->description = $request->input('description');
         $voyage->caracteristiques = $request->input('caracteristiques');    
         $voyage->climat = $request->input('climat');  
         $voyage->img_presentation = $request->input('img_presentation');          
         $voyage->save();
-        return response()->json('sucess', 100);
+        return response()->json('success', 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Voyage  $voyage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $voyage)
+    public function destroy($id)
     {
-        $voyage = Voyage::find($voyage);
+        $voyage = Voyage::find($id);
         $voyage->delete();
-        return response('success', 100);
+        return response('success', 200);
     }
 }
